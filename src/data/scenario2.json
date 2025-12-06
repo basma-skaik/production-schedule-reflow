@@ -1,0 +1,54 @@
+{
+  "workCenters": [
+    {
+      "docId": "wc-1",
+      "docType": "workCenter",
+      "data": {
+        "name": "Packaging Line",
+        "shifts": [
+          { "dayOfWeek": 1, "startHour": 6, "endHour": 14 },
+          { "dayOfWeek": 1, "startHour": 14, "endHour": 22 },
+          { "dayOfWeek": 2, "startHour": 6, "endHour": 14 },
+          { "dayOfWeek": 2, "startHour": 14, "endHour": 22 }
+        ],
+        "maintenanceWindows": [
+          {
+            "startDate": "2025-12-15T10:00:00Z",
+            "endDate": "2025-12-15T12:00:00Z",
+            "reason": "Belt replacement"
+          }
+        ]
+      }
+    }
+  ],
+  "workOrders": [
+    {
+      "docId": "wo-1",
+      "docType": "workOrder",
+      "data": {
+        "workOrderNumber": "PK-100",
+        "manufacturingOrderId": "mo-10",
+        "workCenterId": "wc-1",
+        "startDate": "2025-12-15T06:00:00Z",
+        "endDate": "2025-12-15T09:00:00Z",
+        "durationMinutes": 180,
+        "isMaintenance": false,
+        "dependsOnWorkOrderIds": []
+      }
+    },
+    {
+      "docId": "wo-2",
+      "docType": "workOrder",
+      "data": {
+        "workOrderNumber": "PK-101",
+        "manufacturingOrderId": "mo-10",
+        "workCenterId": "wc-1",
+        "startDate": "2025-12-15T09:00:00Z",
+        "endDate": "2025-12-15T14:00:00Z",
+        "durationMinutes": 300,
+        "isMaintenance": false,
+        "dependsOnWorkOrderIds": ["wo-1"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "workCenters": [
+    {
+      "docId": "wc-1",
+      "docType": "workCenter",
+      "data": {
+        "name": "Mixer",
+        "shifts": [{ "dayOfWeek": 1, "startHour": 7, "endHour": 19 }],
+        "maintenanceWindows": []
+      }
+    },
+    {
+      "docId": "wc-2",
+      "docType": "workCenter",
+      "data": {
+        "name": "Extruder B",
+        "shifts": [{ "dayOfWeek": 1, "startHour": 8, "endHour": 17 }],
+        "maintenanceWindows": [
+          {
+            "startDate": "2025-12-11T12:00:00Z",
+            "endDate": "2025-12-11T17:00:00Z",
+            "reason": "Screw cleaning"
+          }
+        ]
+      }
+    }
+  ],
+  "workOrders": [
+    {
+      "docId": "wo-1",
+      "docType": "workOrder",
+      "data": {
+        "workOrderNumber": "MX-001",
+        "manufacturingOrderId": "mo-5",
+        "workCenterId": "wc-1",
+        "startDate": "2025-12-10T08:00:00Z",
+        "endDate": "2025-12-10T12:00:00Z",
+        "durationMinutes": 240,
+        "isMaintenance": false,
+        "dependsOnWorkOrderIds": []
+      }
+    },
+    {
+      "docId": "wo-2",
+      "docType": "workOrder",
+      "data": {
+        "workOrderNumber": "EX-010",
+        "manufacturingOrderId": "mo-5",
+        "workCenterId": "wc-2",
+        "startDate": "2025-12-11T08:00:00Z",
+        "endDate": "2025-12-11T16:00:00Z",
+        "durationMinutes": 480,
+        "isMaintenance": false,
+        "dependsOnWorkOrderIds": ["wo-1"]
+      }
+    },
+    {
+      "docId": "wo-3",
+      "docType": "workOrder",
+      "data": {
+        "workOrderNumber": "EX-011",
+        "manufacturingOrderId": "mo-5",
+        "workCenterId": "wc-2",
+        "startDate": "2025-12-12T08:00:00Z",
+        "endDate": "2025-12-12T12:00:00Z",
+        "durationMinutes": 240,
+        "isMaintenance": false,
+        "dependsOnWorkOrderIds": ["wo-1", "wo-2"]
+      }
+    }
+  ]
+}
