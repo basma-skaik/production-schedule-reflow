@@ -2,5 +2,8 @@
   "devDependencies": {
     "@types/luxon": "^3.7.1",
     "@types/node": "^24.10.1"
+  },
+  "dependencies": {
+    "luxon": "^3.7.2"
   }
 }

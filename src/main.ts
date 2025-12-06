@@ -128,7 +128,7 @@ async function runScenario(scenario: Scenario, label = "scenario") {
 }
 
 async function main() {
-  const dataDir = path.resolve(__dirname, "../data");
+  const dataDir = path.resolve(__dirname, "./data");
   const files = ["scenario1.json", "scenario2.json", "scenario3.json"];
   let anyLoaded = false;
 
