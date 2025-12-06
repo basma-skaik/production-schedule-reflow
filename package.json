@@ -1,7 +1,28 @@
 {
+  "name": "reflow-task",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basma-skaik/production-schedule-reflow.git"
+  },
+  "author": "Basma Skaik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/basma-skaik/production-schedule-reflow/issues"
+  },
+  "homepage": "https://github.com/basma-skaik/production-schedule-reflow#readme",
+  "description": "",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "build": "tsc",
+    "run": "node dist/main.js"
+  },
   "devDependencies": {
     "@types/luxon": "^3.7.1",
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "luxon": "^3.7.2"
