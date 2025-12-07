@@ -13,32 +13,41 @@ This project implements a **reflow algorithm** that:
 - Ensures all dependencies are satisfied
 - Produces updated schedules with explanations of any changes
 
-The system simulates **realistic manufacturing constraints**, including multi-shift operations, maintenance blocks, and cascading delays.
+The system simulates realistic manufacturing constraints, including multi-shift operations, maintenance blocks, and cascading delays.
 
 ---
 
 ## Algorithm Approach
 
-The core **reflow algorithm** works as follows:
+The core reflow algorithm:
 
-1. **Collect inputs**: Work orders, work centers (with shifts and maintenance), and manufacturing orders.
-2. **Sort by dependencies**: Using a topological-like approach so parent orders are scheduled before children.
+1. **Collect inputs**: work orders, work centers, shifts, maintenance, dependencies.
+2. **Sort work orders using dependency rules** (topological-like approach).
 3. **Iterate through work orders**:
-   - Check **dependencies**: Ensure all parent work orders are complete before scheduling.
-   - Find the **earliest feasible time slot** for the work order:
-     - Respect **work center shifts**
-     - Avoid **maintenance windows**
-     - Prevent **overlaps** with other scheduled orders
-   - If the original time cannot be respected, compute **delay** and record the reason.
-4. **Schedule updates**:
-   - Update start/end times
-   - Add entry to changes log with `wasDelayed`, `delayMinutes`, and `delayReason`.
+   - Validate dependency completion.
+   - Find earliest feasible slot within shifts & maintenance limits.
+   - Recalculate timings if delays occur.
+4. **Apply updates**:
+   - Adjust start/end times.
+   - Record delays and reasons.
 5. **Output**:
-   - Final valid schedule
-   - Summary of delays
-   - Detailed explanation for each moved work order
+   - Valid final schedule.
+   - Summary of delays.
+   - Detailed reasoning behind every adjustment.
 
-> Example: If a 120-min order starts Monday 4 PM, and the shift ends 5 PM, it works 60 min, pauses, then resumes Tuesday 8 AM → completes 9 AM.
+---
+
+## 2. Designing the DependencyGraph and Using Topological Sort
+
+While implementing the `DependencyGraph`, I analyzed how to represent dependencies between `WorkOrderDoc` items as a directed graph. Each work order is a node; dependencies form edges.
+
+I compared DFS-based topological sorting and BFS (Kahn’s Algorithm). I chose **BFS** because:
+
+- It processes nodes in **layers**, matching real scheduling logic (a task becomes ready as soon as parents finish).
+- Cycle detection becomes **simple and explicit** using in-degree counts.
+- BFS is more intuitive for debugging dependency chains in scheduling systems.
+
+I began with a simple adjacency list, then added in-degree tracking, queue processing, and finally cycle detection. This allowed me to fully understand each step before moving deeper into the final implementation.
 
 ---
 
@@ -49,9 +58,15 @@ production-schedule-reflow/
 ├── node_modules/
 ├── package.json
 ├── tsconfig.json
+├── jest.config.js              # Jest configuration for tests
+├── tests/                      # Jest test suite
+│   ├── dependency-graph.test.ts
+│   └── reflow.service.test.ts
+├── prompts/
+│   └── project-interactions.md
 └── src/
-    ├── main.ts                     # Entry point
-    ├── data/                       # JSON scenario files
+    ├── main.ts                 # Entry point
+    ├── data/                   # JSON scenario files
     │   ├── scenario1.json
     │   ├── scenario2.json
     │   └── scenario3.json
@@ -59,7 +74,7 @@ production-schedule-reflow/
         ├── reflow.service.ts       # Main reflow scheduling algorithm
         ├── constraint-checker.ts   # Constraint validation using Luxon
         ├── types.ts                # Shared TypeScript types
-        └── dependency-graph.ts     # Dependency processing (optional)
+        └── dependency-graph.ts     # Dependency processing
 ```
 
 > Note: No `utils/` folder — Luxon is directly used inside `constraint-checker.ts` and `reflow.service.ts`.
@@ -99,6 +114,22 @@ npx ts-node src/main.ts
 ```
 
 Make sure ts-node is installed globally or as a dev dependency.
+
+---
+
+## Running Tests
+
+This project includes Jest test coverage for:
+
+- DependencyGraph (topological ordering, cycle detection)
+
+- Reflow service behavior
+
+To run all tests:
+
+```bash
+npm run test
+```
 
 ---
 
