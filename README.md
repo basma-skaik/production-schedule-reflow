@@ -44,21 +44,23 @@ The core **reflow algorithm** works as follows:
 
 ## Project Structure
 
+```bash
 production-schedule-reflow/
 ├── node_modules/
 ├── package.json
 ├── tsconfig.json
 └── src/
-├── main.ts # Entry point
-├── data/ # JSON scenario files
-│ ├── scenario1.json
-│ ├── scenario2.json
-│ └── scenario3.json
-└── reflow/
-├── reflow.service.ts # Main algorithm
-├── constraint-checker.ts # Validates constraints & uses Luxon
-├── types.ts # TypeScript types
-└── dependency-graph.ts # Optional: Dependency management
+    ├── main.ts                     # Entry point
+    ├── data/                       # JSON scenario files
+    │   ├── scenario1.json
+    │   ├── scenario2.json
+    │   └── scenario3.json
+    └── reflow/
+        ├── reflow.service.ts       # Main reflow scheduling algorithm
+        ├── constraint-checker.ts   # Constraint validation using Luxon
+        ├── types.ts                # Shared TypeScript types
+        └── dependency-graph.ts     # Dependency processing (optional)
+```
 
 > Note: No `utils/` folder — Luxon is directly used inside `constraint-checker.ts` and `reflow.service.ts`.
 
@@ -79,6 +81,8 @@ git clone https://github.com/basma-skaik/production-schedule-reflow.git
 cd production-schedule-reflow
 npm install
 ```
+
+---
 
 ## Running the Project
 
@@ -135,6 +139,8 @@ Make sure ts-node is installed globally or as a dev dependency.
 - luxon — for date/time manipulation
 
 - @types/node and @types/luxon — for TypeScript type support
+
+---
 
 ## License
 
