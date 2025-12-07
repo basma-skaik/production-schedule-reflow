@@ -16,11 +16,15 @@
   "scripts": {
     "start": "ts-node src/main.ts",
     "build": "tsc",
-    "run": "node dist/main.js"
+    "run": "node dist/main.js",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/luxon": "^3.7.1",
     "@types/node": "^24.10.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
