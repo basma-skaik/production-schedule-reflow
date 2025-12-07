@@ -68,9 +68,9 @@ production-schedule-reflow/
 
 ## Sample Data
 
-- `scenario1.json`: Single work order, no conflicts
-- `scenario2.json`: Multiple work orders, same work center, sequential scheduling
-- `scenario3.json`: Multiple work orders across work centers with dependencies and maintenance
+- `scenario1.json` (optional): Simple case with a single work order.
+- `scenario2.json`: Shift + maintenance conflict scenario (Requirement #2).
+- `scenario3.json`: Full delay cascade scenario with dependencies (Requirement #1).
 
 ---
 
