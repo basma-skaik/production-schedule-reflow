@@ -37,7 +37,7 @@ The core reflow algorithm:
 
 ---
 
-## 2. Designing the DependencyGraph and Using Topological Sort
+## Designing the DependencyGraph and Using Topological Sort
 
 While implementing the `DependencyGraph`, I analyzed how to represent dependencies between `WorkOrderDoc` items as a directed graph. Each work order is a node; dependencies form edges.
 
